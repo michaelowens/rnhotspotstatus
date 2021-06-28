@@ -93,12 +93,12 @@ class DeviceListItem extends React.Component<{
             </MyAppText>
           </View>
           <View style={{width: 80, marginRight: 10}}>
-            <MyAppText>{this.props.rewards.today}</MyAppText>
+            <MyAppText>{this.props.rewards?.today}</MyAppText>
           </View>
           <View style={{width: 80, marginRight: 10}}>
-            <MyAppText>{this.props.rewards.yesterday}</MyAppText>
+            <MyAppText>{this.props.rewards?.yesterday}</MyAppText>
           </View>
-          <MyAppText style={{width: 80}}>{this.props.rewards.month}</MyAppText>
+          <MyAppText style={{width: 80}}>{this.props.rewards?.month}</MyAppText>
         </View>
       </TouchableOpacity>
     )
