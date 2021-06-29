@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="b7e12193-6f8b-4c24-822f-a8eed5151d69"
-    Publisher="CN=Michael"
-    Version="1.0.2.0" />
+    Name="41626michaelowens.Helios-HotspotManager"
+    Publisher="CN=0E509B4D-A076-49C8-9026-23FAE71EA219"
+    Version="1.0.3.0" />
 
-  <mp:PhoneIdentity PhoneProductId="b7e12193-6f8b-4c24-822f-a8eed5151d69" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="aa782b9b-63fb-4bf5-9f4c-1e5f67c75a03" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>rnhotspotstatus</DisplayName>
-    <PublisherDisplayName>Michael</PublisherDisplayName>
+    <DisplayName>Helios - Hotspot Manager</DisplayName>
+    <PublisherDisplayName>michaelowens</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -33,7 +33,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="rnhotspotstatus.App">
       <uap:VisualElements
-        DisplayName="rnhotspotstatus"
+        DisplayName="Helios - Hotspot Manager"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="rnhotspotstatus"

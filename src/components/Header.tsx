@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   return (
     <View>
       <View style={styles.topBar}>
-        <MyAppText style={styles.topBarText}>Hotspot Status</MyAppText>
+        <MyAppText style={styles.topBarText}>Helios</MyAppText>
       </View>
 
       <View style={styles.navigation}>

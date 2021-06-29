@@ -1,4 +1,4 @@
-# rnhotspotstatus
+# Helios - Hotspot Manager
 
 A helium hotspot manager for Windows, built with React Native. **This project is in very early stages!**
 
