@@ -20,6 +20,12 @@ const Header: React.FC = () => {
         <NavigationLink to="/devices" style={styles.navigationItem}>
           Devices
         </NavigationLink>
+        <NavigationLink to="/devices/add" style={[styles.navigationItem]}>
+          Add Device
+        </NavigationLink>
+        <NavigationLink to="/settings" style={[styles.navigationItem]}>
+          Settings
+        </NavigationLink>
       </View>
     </View>
   )
