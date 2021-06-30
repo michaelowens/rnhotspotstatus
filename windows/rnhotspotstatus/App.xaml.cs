@@ -43,8 +43,17 @@ namespace rnhotspotstatus
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             base.OnLaunched(e);
+
+            var size = new Windows.Foundation.Size(600, 600);
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(size);
+            ApplicationView.PreferredLaunchViewSize = size;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
             var frame = (Frame)Window.Current.Content;
             frame.Navigate(typeof(MainPage), e.Arguments);
+
+            //frame.MinWidth = 645;
+            //ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(645, 0));
 
             Windows.UI.ViewManagement.ApplicationViewTitleBar uwpTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
             uwpTitleBar.ButtonBackgroundColor = Windows.UI.Colors.Transparent;
