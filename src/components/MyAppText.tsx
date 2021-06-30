@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Text} from 'react-native'
+import React from 'react'
+import {StyleProp, Text, TextStyle} from 'react-native'
 
 const defaultTextStyle = {
   fontFamily: 'Assets/Inter.ttf#Inter',
@@ -7,8 +7,7 @@ const defaultTextStyle = {
   lineHeight: 20,
 }
 
-const MyAppText: React.FC<{style?: any; children: any}> = props => (
-  <Text style={[defaultTextStyle, props.style]}>{props.children}</Text>
-)
+const MyAppText: React.FC<{style?: StyleProp<TextStyle>; children: any}> =
+  props => <Text style={[defaultTextStyle, props.style]}>{props.children}</Text>
 
 export default MyAppText
