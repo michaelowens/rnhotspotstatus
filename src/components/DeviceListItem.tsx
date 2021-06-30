@@ -89,16 +89,16 @@ class DeviceListItem extends React.Component<{
             </View>
             <MyAppText style={{fontWeight: '300'}}>
               Reward scale:{' '}
-              {parseFloat(this.props.hotspot.reward_scale?.toFixed(1) || 0)}
+              {parseFloat(this.props.hotspot.reward_scale?.toFixed(1) || '0')}
             </MyAppText>
           </View>
-          <View style={{width: 80, marginRight: 10}}>
+          <View style={{width: 70, marginRight: 10}}>
             <MyAppText>{this.props.rewards?.today}</MyAppText>
           </View>
-          <View style={{width: 80, marginRight: 10}}>
+          <View style={{width: 70, marginRight: 10}}>
             <MyAppText>{this.props.rewards?.yesterday}</MyAppText>
           </View>
-          <MyAppText style={{width: 80}}>{this.props.rewards?.month}</MyAppText>
+          <MyAppText style={{width: 70}}>{this.props.rewards?.month}</MyAppText>
         </View>
       </TouchableOpacity>
     )

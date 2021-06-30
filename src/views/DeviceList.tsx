@@ -181,11 +181,11 @@ const DeviceList = ({match}) => {
               }}>
               <MyAppText style={{marginRight: 10, width: 40}}>Type</MyAppText>
               <MyAppText style={{marginRight: 10, flex: 1}}>Device</MyAppText>
-              <MyAppText style={{marginRight: 10, width: 80}}>Today</MyAppText>
-              <MyAppText style={{marginRight: 10, width: 80}}>
+              <MyAppText style={{marginRight: 10, width: 70}}>Today</MyAppText>
+              <MyAppText style={{marginRight: 10, width: 70}}>
                 Yesterday
               </MyAppText>
-              <MyAppText style={{width: 80}}>30 Days</MyAppText>
+              <MyAppText style={{width: 70}}>30 Days</MyAppText>
             </View>
             <ScrollView style={{flex: 1}}>
               <View
@@ -233,7 +233,6 @@ const DeviceList = ({match}) => {
                 </TouchableOpacity> */}
                 <View
                   style={{
-                    display: 'flex',
                     justifyContent: 'center',
                     flexWrap: 'wrap',
                   }}>
