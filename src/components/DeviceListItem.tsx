@@ -3,6 +3,7 @@ import {Image, TouchableOpacity, View, ViewStyle} from 'react-native'
 import {Redirect} from 'react-router-native'
 import IDevice from '../models/Device'
 import IHotspot from '../models/Hotspot'
+import {humanReadableName} from '../utils'
 import MyAppText from './MyAppText'
 import StatusLight from './StatusLight'
 
@@ -38,13 +39,6 @@ class DeviceListItem extends React.Component<{
     }
   }
 
-  getHumanName(name: string) {
-    return name
-      .split('-')
-      .map(part => part[0].toUpperCase() + part.substr(1))
-      .join(' ')
-  }
-
   isRelayed(listenAddr: string[] | null) {
     return listenAddr && listenAddr.length > 0 && listenAddr[0].includes('p2p')
   }
@@ -78,7 +72,7 @@ class DeviceListItem extends React.Component<{
                   fontSize: 18,
                   marginBottom: 4,
                 }}>
-                {this.getHumanName(
+                {humanReadableName(
                   this.props.device.name ?? 'Frankly Fake Devicename',
                 )}
               </MyAppText>

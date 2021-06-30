@@ -3,6 +3,7 @@ import {View} from 'react-native'
 import {getHotspot} from '../api'
 import MyAppText from '../components/MyAppText'
 import IHotspot from '../models/Hotspot'
+import {humanReadableName} from '../utils'
 
 const Device: React.FC<{address: string}> = ({address}) => {
   const [hotspot, setHotspot] = useState<IHotspot>()
@@ -27,7 +28,10 @@ const Device: React.FC<{address: string}> = ({address}) => {
 
   return (
     <View style={{padding: 20}}>
-      <MyAppText>Device: {hotspot?.name}</MyAppText>
+      <MyAppText style={{fontSize: 24}}>
+        {hotspot && humanReadableName(hotspot?.name || '')}
+      </MyAppText>
+      <MyAppText style={{fontSize: 12}}>{hotspot?.address}</MyAppText>
     </View>
   )
 }
