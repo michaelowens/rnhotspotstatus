@@ -2,12 +2,12 @@ import React from 'react'
 import {Route, Link} from 'react-router-native'
 import MyAppText from './MyAppText'
 
-const NavigationLink: React.FC = ({
-  children,
-  to,
-  activeOnlyWhenExact,
-  style,
-}) => {
+const NavigationLink: React.FC<{
+  children: React.ReactNode
+  to: string
+  activeOnlyWhenExact?: boolean
+  style?: object
+}> = ({children, to, activeOnlyWhenExact, style}) => {
   return (
     <Route
       path={to}
