@@ -72,7 +72,7 @@ const AddDevice: React.FC = () => {
   }
 
   return (
-    <View style={{padding: 10}}>
+    <View style={{padding: 20}}>
       <MyAppText>Add new device by network address</MyAppText>
       <View style={{flexDirection: 'row', marginTop: 5}}>
         <MyTextInput
