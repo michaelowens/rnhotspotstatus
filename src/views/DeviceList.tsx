@@ -1,172 +1,86 @@
-import React, {useState, useEffect} from 'react'
-import {TouchableOpacity, View, Button, ScrollView} from 'react-native'
+import React, {useState, useEffect, useCallback} from 'react'
+import {View, ScrollView} from 'react-native'
 import {Route, useHistory} from 'react-router-native'
-import {useToast} from 'react-native-fast-toast'
 import DeviceListItem from '../components/DeviceListItem'
 import MyAppText from '../components/MyAppText'
-import MyTextInput from '../components/MyTextInput'
-import IDevice from '../models/Device'
 import {useSharedState} from '../store'
+import IHotspot from '../models/Hotspot'
+import AddDevice from './AddDevice'
+import {getHotspots, getHotspotsRewards} from '../api'
+import Device from './Device'
 
-const AddDevice: React.FC = () => {
-  let history = useHistory()
-  const toast = useToast()
-  const [state, setState] = useSharedState()
-  const [deviceAddress, setDeviceAddress] = useState('')
-  const [ownerAddress, setOwnerAddress] = useState('')
-
-  const addDevice = (device: IDevice) => {
-    const devices = state.devices
-    devices[device.address] = device
-    setState(prev => ({...prev, devices}))
-    toast.show('Hotspot added successfully', {type: 'success'})
-  }
-
-  const addDevices = (newDevices: IDevice[]) => {
-    const devices = state.devices
-    for (let device of newDevices) {
-      devices[device.address] = device
-    }
-    setState(prev => ({...prev, devices}))
-    toast.show('Account imported successfully', {type: 'success'})
-  }
-
-  async function importDevice() {
-    // TODO: add feedback when device already exists
-    if (deviceAddress in state.devices) {
-      toast.show('Hotspot already added', {
-        type: 'danger',
-      })
-      return
-    }
-
-    const response = await fetch(
-      `https://api.helium.io/v1/hotspots/${deviceAddress}`,
-    )
-    const {data} = await response.json()
-    let {address, name} = data
-    const hs: IDevice = {
-      address,
-      name,
-      type: 'generic',
-    }
-    addDevice(hs)
-    history.push('/devices')
-  }
-
-  async function importFromOwner() {
-    const response = await fetch(
-      `https://api.helium.io/v1/accounts/${ownerAddress}/hotspots`,
-    )
-    const {data} = await response.json()
-    let hotspots: IDevice[] = []
-    for (let device of data) {
-      let {address, name} = device
-      hotspots.push({
-        address,
-        name,
-        type: 'generic',
-      })
-    }
-    addDevices(hotspots)
-    history.push('/devices')
-  }
-
-  return (
-    <View style={{padding: 10}}>
-      <MyAppText>Add new device by network address</MyAppText>
-      <View style={{flexDirection: 'row', marginTop: 5}}>
-        <MyTextInput
-          value={deviceAddress}
-          onChangeText={text => setDeviceAddress(text)}
-          style={{flex: 1, marginRight: 10}}
-        />
-        <Button title="Add" onPress={importDevice} color="#3730A3" />
-      </View>
-      <MyAppText style={{marginTop: 20}}>
-        Or import all devices from owner address
-      </MyAppText>
-      <View style={{flexDirection: 'row', marginTop: 5}}>
-        <MyTextInput
-          value={ownerAddress}
-          onChangeText={text => setOwnerAddress(text)}
-          style={{flex: 1, marginRight: 10}}
-        />
-        <Button title="Import" onPress={importFromOwner} color="#3730A3" />
-      </View>
-    </View>
-  )
-}
-
-const Device = ({match}) => {
+const DeviceRoute = ({match}) => {
   return match.params.deviceAddress === 'add' ? (
     <AddDevice />
   ) : (
-    <View style={{padding: 10}}>
-      <MyAppText>Device: {match.params.deviceAddress}</MyAppText>
-    </View>
+    <Device address={match.params.deviceAddress} />
   )
 }
 
 const DeviceList = ({match}) => {
   let history = useHistory()
   const [state, setState] = useSharedState()
-  const [devices, setDevices] = useState([])
+  const [devices, setDevices] = useState<IHotspot[]>([])
   const [rewards, setRewards] = useState({})
 
-  useEffect(() => {
-    const deviceCalls = []
-    for (let addr of Object.keys(state.devices)) {
-      deviceCalls.push(fetch(`https://api.helium.io/v1/hotspots/${addr}`))
-    }
-
-    Promise.all(deviceCalls)
-      .then(results => Promise.all(results.map(r => r.json())))
-      .then(hotspots => {
-        hotspots = hotspots.map(h => h.data)
+  const getData = useCallback(async () => {
+    try {
+      const hotspots = await getHotspots(Object.keys(state.devices))
+      if (hotspots) {
         setDevices(hotspots)
-        return hotspots
-      })
-      .then(fetchRewards)
-      .catch(err => console.error(err))
+        await fetchRewards(hotspots)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
-  function fetchRewards(hotspots) {
-    const rewardCalls = []
-    for (let hs of hotspots) {
-      rewardCalls.push(
-        fetch(
-          `https://api.helium.io/v1/hotspots/${hs.address}/rewards/sum?min_time=-30%20day&max_time=2021-06-28T14%3A55%3A13.897Z&bucket=day`,
-        ),
-      )
-    }
+  useEffect(() => {
+    getData()
+  }, [getData])
 
-    Promise.all(rewardCalls)
-      .then(results => Promise.all(results.map(r => r.json())))
-      .then(rewards => {
-        let newRewards = {}
-        for (let i in rewards) {
-          let {data} = rewards[i]
-          let hotspot = hotspots[i]
-          newRewards[hotspot.address] = {
-            today: parseFloat(data[0]?.total.toFixed(2)) || 0,
-            yesterday: parseFloat(data[1]?.total.toFixed(2)) || 0,
-            month:
-              parseFloat(
-                data.reduce((acc, cur) => acc + cur.total, 0).toFixed(2),
-              ) || 0,
-          }
-        }
-        setRewards(newRewards)
-        // setDevices(hotspots)
-        console.log({newRewards})
-      })
-      .catch(err => console.error(err))
+  async function fetchRewards(hotspots: IHotspot[]) {
+    const date = new Date()
+    const dateUTC = Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      23,
+      59,
+      59,
+    )
+    const maxTime = new Date(dateUTC).toISOString()
+
+    const params = new URLSearchParams({
+      min_time: '-30 day',
+      max_time: maxTime,
+      bucket: 'day',
+    })
+
+    const rewards = await getHotspotsRewards(
+      hotspots.map(hs => hs.address),
+      params.toString(),
+    )
+
+    let newRewards = {}
+    for (let i in rewards) {
+      let {data} = rewards[i]
+      let hotspot = hotspots[i]
+      newRewards[hotspot.address] = {
+        today: parseFloat(data[0]?.total.toFixed(2)) || 0,
+        yesterday: parseFloat(data[1]?.total.toFixed(2)) || 0,
+        month:
+          parseFloat(
+            data.reduce((acc, cur) => acc + cur.total, 0).toFixed(2),
+          ) || 0,
+      }
+    }
+    setRewards(newRewards)
   }
 
   return (
     <View style={{flex: 1}}>
-      <Route path={`${match.url}/:deviceAddress`} component={Device} />
+      <Route path={`${match.url}/:deviceAddress`} component={DeviceRoute} />
       <Route
         exact
         path={match.url}
@@ -199,7 +113,6 @@ const DeviceList = ({match}) => {
                     backgroundColor: '#202223',
                     padding: 10,
                     borderRadius: 5,
-                    display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'center',
                     margin: 5,
