@@ -15,14 +15,14 @@ const AddDevice: React.FC = () => {
   const [ownerAddress, setOwnerAddress] = useState('')
 
   const addDevice = (device: IDevice) => {
-    const devices = state.devices
+    const devices = Object.assign({}, state.devices)
     devices[device.address] = device
     setState(prev => ({...prev, devices}))
     toast.show('Hotspot added successfully', {type: 'success'})
   }
 
   const addDevices = (newDevices: IDevice[]) => {
-    const devices = state.devices
+    const devices = Object.assign({}, state.devices)
     for (let device of newDevices) {
       devices[device.address] = device
     }
