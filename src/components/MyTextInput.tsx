@@ -1,7 +1,11 @@
 import React from 'react'
-import {StyleSheet, TextInput} from 'react-native'
+import {StyleProp, StyleSheet, TextInput, TextStyle} from 'react-native'
 
-const MyTextInput: React.FC = props => {
+const MyTextInput: React.FC<{
+  style?: StyleProp<TextStyle>
+  value?: string | undefined
+  onChangeText?: (text: string) => void
+}> = props => {
   const {style, ...otherProps} = props
   return <TextInput style={[styles.default, style]} {...otherProps} />
 }
