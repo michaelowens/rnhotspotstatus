@@ -45,8 +45,8 @@ class DeviceListItem extends React.Component<{
       .join(' ')
   }
 
-  isRelayed(listenAddr: string) {
-    return listenAddr && listenAddr.includes('p2p')
+  isRelayed(listenAddr: string[] | null) {
+    return listenAddr && listenAddr.length > 0 && listenAddr[0].includes('p2p')
   }
 
   render() {
@@ -82,7 +82,7 @@ class DeviceListItem extends React.Component<{
                   this.props.device.name ?? 'Frankly Fake Devicename',
                 )}
               </MyAppText>
-              {this.isRelayed(this.props.hotspot.status.listen_addrs[0]) && (
+              {this.isRelayed(this.props.hotspot.status.listen_addrs) && (
                 <StatusLight status="relayed" />
               )}
               <StatusLight status={this.props.hotspot.status.online} />
