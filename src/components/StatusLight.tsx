@@ -1,18 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
-
-function getStatusColor(status: string) {
-  switch (status) {
-    case 'online':
-      return '#21a974'
-    case 'offline':
-      return '#8e0404'
-    case 'relayed':
-      return '#a27503'
-    default:
-      return '#969696'
-  }
-}
+import {getStatusColor} from '../utils'
 
 const StatusLight: React.FC<{status: string}> = props => {
   return (

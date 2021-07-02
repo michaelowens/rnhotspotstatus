@@ -3,7 +3,7 @@ import {Image, TouchableOpacity, View, ViewStyle} from 'react-native'
 import {Redirect} from 'react-router-native'
 import IDevice from '../models/Device'
 import IHotspot from '../models/Hotspot'
-import {humanReadableName} from '../utils'
+import {humanReadableName, isRelayed} from '../utils'
 import MyAppText from './MyAppText'
 import StatusLight from './StatusLight'
 
@@ -39,10 +39,6 @@ class DeviceListItem extends React.Component<{
     }
   }
 
-  isRelayed(listenAddr: string[] | null) {
-    return listenAddr && listenAddr.length > 0 && listenAddr[0].includes('p2p')
-  }
-
   render() {
     if (this.state.redirectToDevice) {
       return <Redirect to={'devices/' + this.props.device.address} />
@@ -76,7 +72,7 @@ class DeviceListItem extends React.Component<{
                   this.props.device.name ?? 'Frankly Fake Devicename',
                 )}
               </MyAppText>
-              {this.isRelayed(this.props.hotspot.status.listen_addrs) && (
+              {isRelayed(this.props.hotspot.status.listen_addrs) && (
                 <StatusLight status="relayed" />
               )}
               <StatusLight status={this.props.hotspot.status.online} />
