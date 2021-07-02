@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(SolutionDir)\ExperimentalFeatures.props" Condition="Exists('$(SolutionDir)\ExperimentalFeatures.props')" />
@@ -148,6 +148,30 @@
     <Content Include="Assets\Inter.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\FontAwesome.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FontAwesome5_Brands.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FontAwesome5_Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\FontAwesome5_Solid.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\AntDesign.ttf" />
+    <Content Include="Assets\Entypo.ttf" />
+    <Content Include="Assets\EvilIcons.ttf" />
+    <Content Include="Assets\Feather.ttf" />
+    <Content Include="Assets\Fontisto.ttf" />
+    <Content Include="Assets\Foundation.ttf" />
+    <Content Include="Assets\Ionicons.ttf" />
+    <Content Include="Assets\MaterialCommunityIcons.ttf" />
+    <Content Include="Assets\MaterialIcons.ttf" />
+    <Content Include="Assets\Octicons.ttf" />
+    <Content Include="Assets\SimpleLineIcons.ttf" />
+    <Content Include="Assets\Zocial.ttf" />
     <None Include="rnhotspotstatus_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

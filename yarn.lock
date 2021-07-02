@@ -5513,6 +5513,20 @@ react-native-fast-toast@^2.3.1:
   resolved "https://registry.yarnpkg.com/react-native-fast-toast/-/react-native-fast-toast-2.3.1.tgz#c5f7305b24e59138c475a1180a95c880754c2cc0"
   integrity sha512-QcTzX2a8EjsMKYAjfvks5Do3gLXcMDCo8HuZHXhunmvj0VH6fxAVONLS6/WUsFdExWqvR3k0aaVdvFuH/7Md3Q==
 
+react-native-vector-icons@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-8.1.0.tgz#e8ee2b17bc4d9f636da1c6f67feee8e2a850c3d8"
+  integrity sha512-sHIdBB6Y0dHaot2fMXgy5J/hhCn5YuyN7SKDNFgPzL8KA1oF2/v7mgYMavnK7LIIs2dJoGnDANKf61dsU+TZlg==
+  dependencies:
+    lodash.frompairs "^4.0.1"
+    lodash.isequal "^4.5.0"
+    lodash.isstring "^4.0.1"
+    lodash.omit "^4.5.0"
+    lodash.pick "^4.4.0"
+    lodash.template "^4.5.0"
+    prop-types "^15.7.2"
+    yargs "^16.1.1"
+
 react-native-windows@^0.64.0-0:
   version "0.64.11"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.11.tgz#a31b08e1bb8a3d510e8a5af5337271c829ce2018"
