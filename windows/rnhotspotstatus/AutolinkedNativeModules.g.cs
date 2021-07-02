@@ -5,6 +5,9 @@ using System.Collections.Generic;
 // Namespaces from @react-native-async-storage/async-storage
 using ReactNativeAsyncStorage;
 
+// Namespaces from react-native-webview
+using ReactNativeWebView;
+
 namespace Microsoft.ReactNative.Managed
 {
     internal static class AutolinkedNativeModules
@@ -13,6 +16,8 @@ namespace Microsoft.ReactNative.Managed
         { 
             // IReactPackageProviders from @react-native-async-storage/async-storage
             packageProviders.Add(new ReactNativeAsyncStorage.ReactPackageProvider());
+            // IReactPackageProviders from react-native-webview
+            packageProviders.Add(new ReactNativeWebView.ReactPackageProvider());
         }
     }
 }

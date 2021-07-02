@@ -12,15 +12,17 @@ interface IHotspot {
   block: number
   block_added: number
   geocode: IHotspotGeocode
+  lng: number
+  lat: number
 }
 
-interface IHotspotStatus {
+export interface IHotspotStatus {
   online: string
-  listen_addrs: string[]
+  listen_addrs: string[] | null
   height: number
 }
 
-interface IHotspotGeocode {
+export interface IHotspotGeocode {
   short_street: string
   short_state: string
   short_country: string

@@ -32,3 +32,16 @@ export const getHotspotsRewards = async (
     .then(results => Promise.all(results.map(r => r.json())))
     .catch(err => console.error(err))
 }
+
+export const getHotspotActivity = async (address: string) => {
+  let responseData = []
+  return heliumApi(`hotspots/${address}/activity`)
+    .then(result => result.json())
+    .then(({data, cursor}) => {
+      responseData = data
+      return heliumApi(`hotspots/${address}/activity?cursor=${cursor}`)
+    })
+    .then(result => result.json())
+    .then(({data}) => (responseData = responseData.concat(data)))
+    .catch(err => console.error(err))
+}
