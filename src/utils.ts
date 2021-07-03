@@ -114,3 +114,32 @@ export const getDetails = (activity: IActivity, hotspot: IHotspot) => {
       return ''
   }
 }
+
+export const getRewardType = (type: string) => {
+  switch (type) {
+    case 'poc_challengers':
+      return {name: 'Challenger', color: '#480087'}
+
+    case 'poc_witnesses':
+      return {name: 'Witness', color: '#8d5800'}
+
+    case 'poc_challengees':
+      return {name: 'Beacon', color: '#47487b'}
+
+    case 'data_credits':
+      return {name: 'Data Credits', color: '#006666'}
+
+    // case 'poc_receipts_v1':
+    //   if (activity.challenger === address)
+    //     return {name: 'Challenger', color: '#480087'}
+    //   if (activity.path[0].challengee === address)
+    //     return {name: 'Beacon', color: '#47487b'}
+    //   return {name: 'Witness', color: '#8d5800'}
+
+    // case 'consensus_group_v1':
+    //   return {name: 'Consensus Election', color: '#8f0000'}
+
+    default:
+      return {name: type, color: '#333'}
+  }
+}

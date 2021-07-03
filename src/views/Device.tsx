@@ -218,8 +218,6 @@ const Device: React.FC<{address: string}> = ({address}) => {
                   )}
                   <View
                     style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
                       marginBottom: 10,
                     }}>
                     <DeviceActivityItem item={item} hotspot={hotspot} />
