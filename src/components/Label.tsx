@@ -8,6 +8,7 @@ type LabelProps = {
   color?: string
   size?: string
   bold?: boolean
+  outline?: boolean
 }
 
 const Label: React.FC<LabelProps> = ({
@@ -16,13 +17,15 @@ const Label: React.FC<LabelProps> = ({
   color,
   size = 'small',
   bold,
+  outline,
 }) => {
   return (
     <View
       style={[
         styles.default,
         styles[size],
-        color ? {backgroundColor: color} : null,
+        outline ? styles.border : styles.background,
+        color ? {[outline ? 'borderColor' : 'backgroundColor']: color} : null,
         style,
       ]}>
       <MyAppText style={bold ? {fontWeight: '500'} : null}>{title}</MyAppText>
@@ -32,11 +35,17 @@ const Label: React.FC<LabelProps> = ({
 
 const styles = StyleSheet.create({
   default: {
-    backgroundColor: '#333',
     borderRadius: 6,
     width: 'auto',
     alignSelf: 'flex-start',
     alignItems: 'center',
+  },
+  background: {
+    backgroundColor: '#333',
+  },
+  border: {
+    borderColor: '#333',
+    borderWidth: 1,
   },
   small: {
     padding: 2,
