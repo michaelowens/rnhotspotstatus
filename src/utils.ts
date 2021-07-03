@@ -129,6 +129,9 @@ export const getRewardType = (type: string) => {
     case 'data_credits':
       return {name: 'Data Credits', color: '#006666'}
 
+    case 'consensus':
+      return {name: 'Consensus', color: '#8f0000'}
+
     // case 'poc_receipts_v1':
     //   if (activity.challenger === address)
     //     return {name: 'Challenger', color: '#480087'}

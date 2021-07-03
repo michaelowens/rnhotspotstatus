@@ -126,7 +126,8 @@ const DeviceActivityItem: React.FC<{
             <>
               <Icon
                 name="remove-red-eye"
-                style={{marginTop: 3, marginRight: 3}}
+                style={{marginTop: 1, marginRight: 3}}
+                size={16}
                 color="#FCC945"
               />
               <MyAppText>{witnesses}</MyAppText>
