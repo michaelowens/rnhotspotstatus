@@ -39,7 +39,11 @@ export const getActivityType = (activity: IActivity, address: string) => {
         return {name: 'Challenger', color: '#480087'}
       if (activity.path[0].challengee === address)
         return {name: 'Beacon', color: '#47487b'}
-      return {name: 'Witness', color: '#8d5800'}
+      const witness = activity.path[0].witnesses.find(
+        w => w.gateway === address,
+      )
+      if (witness?.is_valid) return {name: 'Witness', color: '#8d5800'}
+      return {name: 'Witness', color: '#717e98'}
 
     case 'consensus_group_v1':
       return {name: 'Consensus Election', color: '#8f0000'}
