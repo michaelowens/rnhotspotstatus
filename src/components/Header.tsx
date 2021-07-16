@@ -11,12 +11,12 @@ const Header: React.FC = () => {
       </View>
 
       <View style={styles.navigation}>
-        <NavigationLink
+        {/* <NavigationLink
           to="/"
           activeOnlyWhenExact
           style={styles.navigationItem}>
           Dashboard
-        </NavigationLink>
+        </NavigationLink> */}
         <NavigationLink to="/devices" style={styles.navigationItem}>
           Devices
         </NavigationLink>
