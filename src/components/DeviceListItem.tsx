@@ -41,7 +41,7 @@ class DeviceListItem extends React.Component<{
 
   render() {
     if (this.state.redirectToDevice) {
-      return <Redirect to={'devices/' + this.props.device.address} />
+      return <Redirect to={'device/' + this.props.device.address} />
     }
 
     return (

@@ -7,6 +7,8 @@ import DeviceList from './views/DeviceList'
 import {ToastProvider} from 'react-native-fast-toast'
 import {SharedStateProvider} from './store'
 import Settings from './views/Settings'
+import AddDevice from './views/AddDevice'
+import Device from './views/Device'
 
 const App: React.FC = () => {
   const backgroundStyle: StyleProp<ViewStyle> = {
@@ -27,7 +29,9 @@ const App: React.FC = () => {
             <View style={backgroundStyle}>
               <Header />
               <Route exact path="/" component={Home} />
+              <Route path="/add-device" component={AddDevice} />
               <Route path="/devices" component={DeviceList} />
+              <Route path="/device/:deviceAddress" component={Device} />
               <Route path="/settings" component={Settings} />
             </View>
           </BackButton>

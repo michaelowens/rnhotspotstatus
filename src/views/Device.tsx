@@ -10,7 +10,8 @@ import IActivity from '../models/Activity'
 import IHotspot from '../models/Hotspot'
 import {getStatusColor, humanReadableName, isRelayed} from '../utils'
 
-const Device: React.FC<{address: string}> = ({address}) => {
+const Device: React.FC = ({match}) => {
+  const address = match.params.deviceAddress
   const [hotspot, setHotspot] = useState<IHotspot>()
   const [rewards, setRewards] = useState({
     today: 0,
