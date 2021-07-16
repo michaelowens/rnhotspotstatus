@@ -38,13 +38,16 @@ const Device: React.FC<{address: string}> = ({address}) => {
     console.log('fetching rewards', hs)
 
     const date = new Date()
+    date.setHours(23)
+    date.setMinutes(59)
+    date.setSeconds(59)
     const dateUTC = Date.UTC(
       date.getUTCFullYear(),
       date.getUTCMonth(),
       date.getUTCDate(),
-      23,
-      59,
-      59,
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds(),
     )
     const maxTime = new Date(dateUTC).toISOString()
 
