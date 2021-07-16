@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, ScrollView, StyleSheet, View} from 'react-native'
 import {getHotspot, getHotspotActivity, getHotspotRewards} from '../api'
+import BarChart from '../components/BarChart'
 import DeviceActivityItem from '../components/DeviceActivityItem'
 import DeviceLocationMap from '../components/DeviceLocationMap'
 import Label from '../components/Label'
@@ -17,6 +18,7 @@ const Device: React.FC<{address: string}> = ({address}) => {
     week: 0,
     month: 0,
     alltime: 0,
+    daily: [],
   })
   const [activity, setActivity] = useState<IActivity[]>([])
 
@@ -82,6 +84,7 @@ const Device: React.FC<{address: string}> = ({address}) => {
         parseFloat(data.reduce((acc, cur) => acc + cur.total, 0).toFixed(2)) ||
         0,
       alltime: parseFloat(dataSum.total.toFixed(2)) || 0,
+      daily: data.map(r => r.total),
     }
 
     setRewards(newRewards)
@@ -184,50 +187,62 @@ const Device: React.FC<{address: string}> = ({address}) => {
               </View>
             </View>
           </View>
-          <View
-            style={[
-              styles.box,
-              {
-                marginBottom: 20,
-                flexDirection: 'column',
-                maxWidth: 1000,
-                width: '100%',
-                alignSelf: 'center',
-              },
-            ]}>
-            {activity.map(item => {
-              const date = new Date(item.time * 1000)
-              const newDateString = date.toLocaleDateString(
-                navigator.language,
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{marginRight: 10, width: 315}}>
+              <View
+                style={[styles.box, {flexDirection: 'column', height: 120}]}>
+                <MyAppText style={{marginBottom: 10, fontSize: 18}}>
+                  30 Days - Rewards
+                </MyAppText>
+                <BarChart data={rewards.daily}></BarChart>
+              </View>
+            </View>
+            <View
+              style={[
+                styles.box,
                 {
-                  month: 'short',
-                  day: 'numeric',
+                  marginBottom: 20,
+                  flexDirection: 'column',
+                  maxWidth: 1000,
+                  flex: 1,
                 },
-              )
-              let dateString = ''
-              let marginTop = 0
-              if (prevDateString !== newDateString) {
-                marginTop = prevDateString ? 10 : 0
-                dateString = newDateString
-                prevDateString = newDateString
-              }
+              ]}>
+              {activity.map(item => {
+                const date = new Date(item.time * 1000)
+                const newDateString = date.toLocaleDateString(
+                  navigator.language,
+                  {
+                    month: 'short',
+                    day: 'numeric',
+                  },
+                )
+                let dateString = ''
+                let marginTop = 0
+                if (prevDateString !== newDateString) {
+                  marginTop = prevDateString ? 10 : 0
+                  dateString = newDateString
+                  prevDateString = newDateString
+                }
 
-              return (
-                <React.Fragment key={item.hash}>
-                  {!!dateString && (
-                    <View style={{width: 120, marginBottom: 10, marginTop}}>
-                      <MyAppText style={{fontSize: 18}}>{dateString}</MyAppText>
+                return (
+                  <React.Fragment key={item.hash}>
+                    {!!dateString && (
+                      <View style={{marginBottom: 10, marginTop}}>
+                        <MyAppText style={{fontSize: 18}}>
+                          {dateString}
+                        </MyAppText>
+                      </View>
+                    )}
+                    <View
+                      style={{
+                        marginBottom: 10,
+                      }}>
+                      <DeviceActivityItem item={item} hotspot={hotspot} />
                     </View>
-                  )}
-                  <View
-                    style={{
-                      marginBottom: 10,
-                    }}>
-                    <DeviceActivityItem item={item} hotspot={hotspot} />
-                  </View>
-                </React.Fragment>
-              )
-            })}
+                  </React.Fragment>
+                )
+              })}
+            </View>
           </View>
         </View>
       </ScrollView>
