@@ -116,7 +116,7 @@ const DeviceActivityItem: React.FC<{
                 width: 16,
                 height: 12,
               }}
-              style={{marginRight: 5, marginTop: 2}}
+              style={{marginRight: 5, marginTop: 3}}
             />
           )}
           {!!details && (
