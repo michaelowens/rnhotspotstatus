@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingRight: 6,
   },
   large: {
-    padding: 8,
+    padding: 6,
     paddingLeft: 16,
     paddingRight: 16,
     borderRadius: 8,
