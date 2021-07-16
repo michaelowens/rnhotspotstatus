@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import {View, ScrollView} from 'react-native'
+import {View, ScrollView, ActivityIndicator} from 'react-native'
 import {Route, useHistory} from 'react-router-native'
 import DeviceListItem from '../components/DeviceListItem'
 import MyAppText from '../components/MyAppText'
@@ -10,6 +10,7 @@ import {getHotspots, getHotspotsRewards} from '../api'
 const DeviceList = ({match}) => {
   let history = useHistory()
   const [state, setState] = useSharedState()
+  const [loaded, setLoaded] = useState(false)
   const [devices, setDevices] = useState<IHotspot[]>([])
   const [rewards, setRewards] = useState({})
 
@@ -19,6 +20,7 @@ const DeviceList = ({match}) => {
       if (hotspots) {
         setDevices(hotspots)
         await fetchRewards(hotspots)
+        setLoaded(true)
       }
     } catch (error) {
       console.log(error)
@@ -69,6 +71,15 @@ const DeviceList = ({match}) => {
       }
     }
     setRewards(newRewards)
+  }
+
+  // TODO: proper loading check
+  if (!loaded) {
+    return (
+      <View>
+        <ActivityIndicator size="large" style={{marginTop: 10}} />
+      </View>
+    )
   }
 
   return (

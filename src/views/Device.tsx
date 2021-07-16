@@ -104,7 +104,7 @@ const Device: React.FC = ({match}) => {
   if (!hotspot) {
     return (
       <View>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" style={{marginTop: 10}} />
       </View>
     )
   }
