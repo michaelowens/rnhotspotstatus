@@ -25,7 +25,7 @@ const DeviceList = ({match}) => {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [state])
 
   useEffect(() => {
     getData()

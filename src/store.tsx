@@ -19,8 +19,6 @@ const useMyState = () => {
 
   useEffect(() => {
     ;(async () => {
-      console.log(loaded.current)
-
       if (loaded.current) {
         console.log('config changed!')
         AsyncStorage.setItem('settings', JSON.stringify(state))
